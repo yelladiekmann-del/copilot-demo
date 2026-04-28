@@ -1,4 +1,4 @@
-import { Search, Sparkles, ChevronDown } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 
 export function LandingHero() {
   return (
@@ -22,12 +22,11 @@ export function LandingHero() {
       <div className="bg-card border-b border-border">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20">
           <a href="#" className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-md flex items-center justify-center" style={{ background: "var(--vb-navy)" }}>
-              <Sparkles className="h-5 w-5" style={{ color: "var(--vb-orange)" }} />
-            </div>
-            <span className="text-2xl font-bold tracking-tight" style={{ color: "var(--vb-navy)" }}>
-              Volksbank Kurpfalz
-            </span>
+            <img
+              src="https://atruvia.scene7.com/is/image/atruvia/vbkp%20logo%201200x113"
+              alt="Volksbank Kurpfalz"
+              className="h-10 w-auto"
+            />
           </a>
           <button className="vb-pill vb-pill-primary inline-flex items-center gap-2">
             Login OnlineBanking
@@ -47,7 +46,7 @@ export function LandingHero() {
               Neu für unsere Beraterinnen und Berater
             </div>
             <h1 className="text-white text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight">
-              KUNDE ANRUFT:<br />
+              KUNDE RUFT AN:<br />
               <span style={{ color: "var(--vb-orange)" }}>SIE WISSEN BESCHEID.</span>
             </h1>
             <p className="mt-6 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed">
@@ -62,10 +61,6 @@ export function LandingHero() {
                 Mehr erfahren <ChevronDown className="h-4 w-4" />
               </a>
             </div>
-
-            <p className="mt-10 text-xs text-white/60">
-              * Pilotprojekt der Volksbank Kurpfalz · entwickelt mit Aurea Intelligence · BaFin- &amp; DSGVO-konform
-            </p>
           </div>
         </div>
 
