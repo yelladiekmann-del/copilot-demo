@@ -7,16 +7,16 @@ import {
 } from "lucide-react";
 
 const transcriptScript = [
-  { who: "client", text: "Guten Tag, hier spricht Marina Keller. Ich hätte eine kurze Frage zu meiner Hypothek." },
-  { who: "advisor", text: "Frau Keller, schön Sie zu hören — Sie meinen die Festhypothek, die im März ausläuft?" },
+  { who: "client", text: "Guten Tag, hier spricht Marina Keller. Ich hätte eine kurze Frage zu meiner Baufinanzierung." },
+  { who: "advisor", text: "Frau Keller, schön Sie zu hören — Sie meinen die Festzinsbindung, die im März ausläuft?" },
   { who: "client", text: "Genau, ich überlege, ob ich verlängern oder umschulden soll." },
   { who: "advisor", text: "Ich habe gerade Ihre aktuelle Konditionsübersicht vor mir. Lassen Sie uns das durchgehen." },
 ];
 
 const insights = [
-  { icon: AlertCircle, tone: "warning", title: "Hypothek läuft in 47 Tagen aus", body: "CHF 680'000 · 1.45% · Verlängerungsfenster offen" },
-  { icon: TrendingUp, tone: "accent", title: "Cross-Sell Opportunität", body: "Vorsorge 3a noch nicht ausgeschöpft (CHF 4'200 möglich)" },
-  { icon: Sparkles, tone: "primary", title: "Empfohlener Gesprächseinstieg", body: "Auf SARON-Modell verweisen — Profil passt (langfr. Horizont)" },
+  { icon: AlertCircle, tone: "warning", title: "Zinsbindung läuft in 47 Tagen aus", body: "EUR 320.000 · 1,45 % · Forward-Darlehen jetzt sinnvoll" },
+  { icon: TrendingUp, tone: "accent", title: "Cross-Sell-Chance", body: "VR Riester-Rente nicht voll ausgeschöpft (EUR 1.800 möglich)" },
+  { icon: Sparkles, tone: "primary", title: "Empfohlener Gesprächseinstieg", body: "Festgeld 2,40 % erwähnen — passt zum Liquiditätsprofil" },
 ];
 
 type CallPhase = "idle" | "ringing" | "active";
@@ -73,22 +73,22 @@ export function CopilotDemo() {
   const ss = String(duration % 60).padStart(2, "0");
 
   return (
-    <section id="demo" className="relative max-w-7xl mx-auto px-6 py-16">
+    <section id="demo" className="relative max-w-7xl mx-auto px-6 py-20">
       <div className="text-center mb-10">
-        <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-3">Live-Simulation</div>
-        <h2 className="font-display text-4xl md:text-5xl font-medium">Sehen Sie den Copilot in Aktion</h2>
+        <div className="text-xs uppercase tracking-[0.25em] font-semibold mb-3" style={{ color: "var(--vb-orange)" }}>Live-Simulation</div>
+        <h2 className="text-4xl md:text-5xl font-extrabold" style={{ color: "var(--vb-navy)" }}>Sehen Sie den Copilot in Aktion</h2>
         <p className="mt-3 text-muted-foreground">Klicken Sie auf "Eingehender Anruf" — sehen Sie zu, wie Aurea die Nummer erkennt und das Dossier aufbaut.</p>
       </div>
 
-      <div className="glass rounded-3xl p-3 md:p-5 shadow-[var(--shadow-elegant)]">
+      <div className="vb-card rounded-2xl p-3 md:p-5 shadow-[var(--shadow-elegant)]">
         {/* Window chrome */}
-        <div className="flex items-center justify-between px-3 pb-3 border-b border-border/50">
+        <div className="flex items-center justify-between px-3 pb-3 border-b border-border">
           <div className="flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-[oklch(0.65_0.22_25)]" />
-            <span className="h-3 w-3 rounded-full bg-[oklch(0.78_0.15_75)]" />
-            <span className="h-3 w-3 rounded-full bg-[oklch(0.72_0.16_155)]" />
+            <span className="h-3 w-3 rounded-full bg-[oklch(0.7_0.2_25)]" />
+            <span className="h-3 w-3 rounded-full bg-[oklch(0.78_0.16_70)]" />
+            <span className="h-3 w-3 rounded-full bg-[oklch(0.7_0.16_145)]" />
           </div>
-          <div className="text-[11px] font-mono text-muted-foreground">aurea.bank · advisor workspace</div>
+          <div className="text-[11px] font-mono text-muted-foreground">copilot.volksbank-kurpfalz.de · advisor workspace</div>
           <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
         </div>
 
@@ -125,7 +125,7 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
   const idle = phase === "idle";
 
   return (
-    <div className="rounded-2xl bg-secondary/40 border border-border/60 p-5">
+    <div className="rounded-xl bg-secondary border border-border p-5">
       <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
         <span className="flex items-center gap-1.5">
           <PhoneIncoming className="h-3.5 w-3.5" />
@@ -137,20 +137,21 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
       <div className="flex flex-col items-center text-center py-3">
         <div className={`relative h-20 w-20 rounded-full border flex items-center justify-center mb-4 transition-all duration-500 ${
           idle
-            ? "bg-secondary/60 border-border/60"
+            ? "bg-card border-border"
             : callActive
-            ? "bg-gradient-to-br from-primary/30 to-accent/30 border-primary/40"
-            : "bg-secondary border-primary/30 pulse-ring"
+            ? "border-2"
+            : "bg-card border-2 pulse-ring"
         }`}>
+          {callActive && <div className="absolute inset-0 rounded-full" style={{ background: "var(--gradient-orange)", opacity: 0.15 }} />}
           {idle || ringing ? (
-            <Phone className={`h-7 w-7 ${ringing ? "text-primary animate-pulse" : "text-muted-foreground"}`} />
+            <Phone className={`h-7 w-7 ${ringing ? "animate-pulse" : "text-muted-foreground"}`} style={ringing ? { color: "var(--vb-orange)" } : undefined} />
           ) : (
-            <span className="font-display text-2xl gold-text" style={{ animation: "fade-up 0.5s ease-out" }}>MK</span>
+            <span className="text-2xl font-bold relative" style={{ color: "var(--vb-navy)", animation: "fade-up 0.5s ease-out" }}>MK</span>
           )}
         </div>
 
         {/* Number & identity */}
-        <div className="font-mono text-sm tracking-wider">+41 79 412 88 03</div>
+        <div className="font-mono text-sm tracking-wider" style={{ color: "var(--vb-navy)" }}>+49 6221 412 88 03</div>
         <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
           {idle ? "Keine Verbindung" : ringing ? "Nummer wird erkannt…" : "Identität verifiziert"}
         </div>
@@ -158,8 +159,8 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
         <div className="mt-3 min-h-[44px]">
           {callActive && (
             <div style={{ animation: "fade-up 0.4s ease-out" }}>
-              <div className="font-display text-lg">Marina Keller</div>
-              <div className="text-xs text-muted-foreground mt-0.5">Premium · Kundin seit 2014</div>
+              <div className="text-lg font-bold" style={{ color: "var(--vb-navy)" }}>Marina Keller</div>
+              <div className="text-xs text-muted-foreground mt-0.5">VR-Mitglied · Kundin seit 2014</div>
             </div>
           )}
           {ringing && (
@@ -179,14 +180,15 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
                 <div
                   key={i}
                   className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg border text-[11px] transition-all ${
-                    done ? "bg-secondary/30 border-border/40 text-muted-foreground" :
-                    active ? "bg-primary/10 border-primary/30 text-foreground" :
+                    done ? "bg-card border-border text-muted-foreground" :
+                    active ? "bg-card border-2 text-foreground" :
                     "bg-transparent border-transparent text-muted-foreground/40"
                   }`}
+                  style={active ? { borderColor: "var(--vb-orange)" } : undefined}
                 >
                   <span className="h-5 w-5 rounded-md flex items-center justify-center shrink-0">
-                    {done ? <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "oklch(0.72 0.16 155)" }} /> :
-                     active ? <Loader2 className="h-3.5 w-3.5 text-primary animate-spin" /> :
+                    {done ? <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "var(--vb-navy)" }} /> :
+                     active ? <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "var(--vb-orange)" }} /> :
                      <Icon className="h-3.5 w-3.5" />}
                   </span>
                   <div className="flex-1 min-w-0">
@@ -203,20 +205,20 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
 
         {callActive ? (
           <div className="mt-5 flex items-center gap-2">
-            <button className="h-11 w-11 rounded-full bg-secondary border border-border flex items-center justify-center hover:bg-secondary/70">
+            <button className="h-11 w-11 rounded-full bg-card border border-border flex items-center justify-center hover:bg-secondary">
               <Mic className="h-4 w-4" />
             </button>
-            <button className="h-11 w-11 rounded-full bg-secondary border border-border flex items-center justify-center hover:bg-secondary/70">
+            <button className="h-11 w-11 rounded-full bg-card border border-border flex items-center justify-center hover:bg-secondary">
               <PauseCircle className="h-4 w-4" />
             </button>
-            <button onClick={() => setPhase("idle")} className="h-11 px-5 rounded-full bg-[oklch(0.6_0.22_25)] text-white text-sm font-medium hover:opacity-90">
+            <button onClick={() => setPhase("idle")} className="h-11 px-5 rounded-full bg-[oklch(0.55_0.22_25)] text-white text-sm font-semibold hover:opacity-90">
               Auflegen
             </button>
           </div>
         ) : idle ? (
           <button
             onClick={() => setPhase("ringing")}
-            className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[oklch(0.72_0.16_155)] text-white text-sm font-medium hover:opacity-90 shadow-lg pulse-ring"
+            className="mt-6 vb-pill vb-pill-orange inline-flex items-center gap-2 pulse-ring"
           >
             <Phone className="h-4 w-4" />
             Eingehender Anruf
@@ -232,9 +234,10 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
             {Array.from({ length: 24 }).map((_, i) => (
               <span
                 key={i}
-                className="w-0.5 bg-primary/70 rounded-full"
+                className="w-0.5 rounded-full"
                 style={{
                   height: "100%",
+                  background: "var(--vb-orange)",
                   animation: `wave 1.${i % 9}s ease-in-out infinite`,
                   animationDelay: `${i * 0.05}s`,
                   transformOrigin: "center",
@@ -250,16 +253,16 @@ function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase;
 
 function Transcript({ visible, active }: { visible: number; active: boolean }) {
   return (
-    <div className="rounded-2xl bg-secondary/30 border border-border/60 p-4">
+    <div className="rounded-xl bg-secondary border border-border p-4">
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs uppercase tracking-wider text-muted-foreground">Live-Transkript</span>
-        {active && <span className="text-[10px] font-mono text-success" style={{ color: "oklch(0.72 0.16 155)" }}>● REC</span>}
+        {active && <span className="text-[10px] font-mono font-bold" style={{ color: "var(--vb-orange)" }}>● REC</span>}
       </div>
       <div className="space-y-3 min-h-[140px] text-sm">
         {!active && <div className="text-xs text-muted-foreground italic">Wird aktiv, sobald der Anruf beginnt.</div>}
         {transcriptScript.slice(0, visible).map((line, i) => (
           <div key={i} className="flex gap-2" style={{ animation: "fade-up 0.4s ease-out" }}>
-            <div className={`text-[10px] font-mono uppercase tracking-wider mt-0.5 shrink-0 w-14 ${line.who === "client" ? "text-accent" : "text-primary"}`}>
+            <div className="text-[10px] font-mono uppercase tracking-wider mt-0.5 shrink-0 w-14 font-bold" style={{ color: line.who === "client" ? "var(--vb-orange)" : "var(--vb-navy)" }}>
               {line.who === "client" ? "Kundin" : "Berater"}
             </div>
             <div className="text-foreground/90 leading-relaxed">{line.text}</div>
@@ -273,51 +276,51 @@ function Transcript({ visible, active }: { visible: number; active: boolean }) {
 function Dossier({ active, recognized }: { active: boolean; recognized: boolean }) {
   if (!recognized) {
     return (
-      <div className="rounded-2xl bg-card/40 border border-dashed border-border/60 p-8 h-full flex flex-col items-center justify-center text-center min-h-[420px]">
-        <div className="h-12 w-12 rounded-2xl bg-secondary/60 border border-border/60 flex items-center justify-center mb-4">
-          {active ? <Loader2 className="h-5 w-5 text-primary animate-spin" /> : <Database className="h-5 w-5 text-muted-foreground" />}
+      <div className="rounded-xl bg-secondary border border-dashed border-border p-8 h-full flex flex-col items-center justify-center text-center min-h-[420px]">
+        <div className="h-12 w-12 rounded-xl bg-card border border-border flex items-center justify-center mb-4">
+          {active ? <Loader2 className="h-5 w-5 animate-spin" style={{ color: "var(--vb-orange)" }} /> : <Database className="h-5 w-5 text-muted-foreground" />}
         </div>
-        <div className="font-display text-lg text-muted-foreground">Wartet auf Anruf</div>
+        <div className="text-lg font-bold text-muted-foreground">Wartet auf Anruf</div>
         <div className="text-xs text-muted-foreground/70 mt-2 max-w-xs">Sobald eine Nummer erkannt ist, erscheint hier das vollständige Kundendossier — automatisch und in Echtzeit.</div>
       </div>
     );
   }
 
   return (
-    <div className="rounded-2xl bg-card/60 border border-border/60 p-5 h-full" style={{ animation: "fade-up 0.5s ease-out" }}>
+    <div className="rounded-xl bg-card border border-border p-5 h-full" style={{ animation: "fade-up 0.5s ease-out" }}>
       <div className="flex items-start justify-between mb-5">
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Kundendossier</div>
-          <h3 className="font-display text-2xl mt-1">Marina Keller</h3>
-          <div className="text-xs text-muted-foreground mt-1">Selbstständig · 42 Jahre · Zürich · Risikoprofil: ausgewogen</div>
+          <h3 className="text-2xl font-extrabold mt-1" style={{ color: "var(--vb-navy)" }}>Marina Keller</h3>
+          <div className="text-xs text-muted-foreground mt-1">Selbstständig · 42 Jahre · Heidelberg · Risikoprofil: ausgewogen</div>
         </div>
-        <span className="px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30 text-[10px] font-medium text-primary uppercase tracking-wider">
-          Premium
+        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white" style={{ background: "var(--gradient-orange)" }}>
+          VR-Mitglied
         </span>
       </div>
 
       {/* Net worth strip */}
       <div className="grid grid-cols-3 gap-3 mb-5">
-        <KPI label="Vermögen gesamt" value="CHF 1.24M" trend="+4.2%" tone="success" />
-        <KPI label="Verbindlichkeiten" value="CHF 680k" trend="Hypothek" tone="muted" />
-        <KPI label="Liquidität" value="CHF 84.5k" trend="3 Konten" tone="muted" />
+        <KPI label="Vermögen gesamt" value="EUR 612k" trend="+4,2 %" tone="success" />
+        <KPI label="Verbindlichkeiten" value="EUR 320k" trend="Baufi." tone="muted" />
+        <KPI label="Liquidität" value="EUR 38,5k" trend="3 Konten" tone="muted" />
       </div>
 
       {/* Sections */}
       <div className="space-y-3">
-        <DossierRow icon={Home} title="Hypothek Lindenstrasse 14" meta="Festhypothek · Auslauf 14.03.2026" value="CHF 680'000" badge="47 Tage" badgeTone="warning" pulse={active} />
-        <DossierRow icon={Wallet} title="Privatkonto + 3a" meta="UBS Key4 · letzte Bewegung gestern" value="CHF 84'520" />
-        <DossierRow icon={Briefcase} title="Wertschriftendepot" meta="42% Aktien · 38% Obligationen · 20% Alt." value="CHF 478'200" badge="+4.2%" badgeTone="success" />
-        <DossierRow icon={Calendar} title="Letzte Beratung" meta="07.11.2025 · Vorsorgeplanung mit C. Müller" value="vor 4 Mt." />
-        <DossierRow icon={FileText} title="Offene Aufgaben" meta="Steuerauszug 2025 · Anlagestrategie-Review" value="2 offen" badgeTone="accent" />
+        <DossierRow icon={Home} title="Baufinanzierung Hauptstr. 14, HD" meta="Festzinsbindung · Auslauf 14.03.2026" value="EUR 320.000" badge="47 Tage" badgeTone="warning" pulse={active} />
+        <DossierRow icon={Wallet} title="VR-Privatkonto + Tagesgeld" meta="VR-Bank · letzte Bewegung gestern" value="EUR 38.520" />
+        <DossierRow icon={Briefcase} title="Wertpapierdepot Union Invest." meta="42 % Aktien · 38 % Renten · 20 % Misch" value="EUR 254.200" badge="+4,2 %" badgeTone="success" />
+        <DossierRow icon={Calendar} title="Letzte Beratung" meta="07.11.2025 · Altersvorsorge mit C. Müller" value="vor 4 Mt." />
+        <DossierRow icon={FileText} title="Offene Aufgaben" meta="Steuerbescheinigung 2025 · Depot-Review" value="2 offen" badgeTone="accent" />
       </div>
 
-      <div className="mt-5 pt-4 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
+      <div className="mt-5 pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
-          <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "oklch(0.72 0.16 155)" }} />
-          Synchronisiert · Avaloq · Salesforce · Genesys
+          <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "var(--vb-navy)" }} />
+          Synchronisiert · agree21 · VR-CRM · Genesys
         </span>
-        <span className="font-mono">aktualisiert vor 0.4s</span>
+        <span className="font-mono">aktualisiert vor 0,4 s</span>
       </div>
     </div>
   );
@@ -325,11 +328,11 @@ function Dossier({ active, recognized }: { active: boolean; recognized: boolean 
 
 function KPI({ label, value, trend, tone }: { label: string; value: string; trend?: string; tone?: "success" | "muted" }) {
   return (
-    <div className="rounded-xl bg-secondary/40 border border-border/40 p-3">
+    <div className="rounded-lg bg-secondary border border-border p-3">
       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
-      <div className="font-display text-lg mt-1">{value}</div>
+      <div className="text-lg font-bold mt-1" style={{ color: "var(--vb-navy)" }}>{value}</div>
       {trend && (
-        <div className={`text-[10px] mt-0.5 ${tone === "success" ? "" : "text-muted-foreground"}`} style={tone === "success" ? { color: "oklch(0.72 0.16 155)" } : undefined}>
+        <div className={`text-[10px] mt-0.5 ${tone === "success" ? "font-semibold" : "text-muted-foreground"}`} style={tone === "success" ? { color: "var(--vb-orange)" } : undefined}>
           {trend}
         </div>
       )}
@@ -339,22 +342,26 @@ function KPI({ label, value, trend, tone }: { label: string; value: string; tren
 
 function DossierRow({ icon: Icon, title, meta, value, badge, badgeTone, pulse }: { icon: any; title: string; meta: string; value: string; badge?: string; badgeTone?: "warning" | "success" | "accent"; pulse?: boolean }) {
   const badgeColor =
-    badgeTone === "warning" ? "bg-[oklch(0.78_0.15_75)]/15 text-[oklch(0.85_0.15_75)] border-[oklch(0.78_0.15_75)]/30" :
-    badgeTone === "success" ? "bg-[oklch(0.72_0.16_155)]/15 text-[oklch(0.78_0.16_155)] border-[oklch(0.72_0.16_155)]/30" :
-    "bg-accent/15 text-accent border-accent/30";
+    badgeTone === "warning" ? "text-white border-transparent" :
+    badgeTone === "success" ? "text-white border-transparent" :
+    "text-white border-transparent";
+  const badgeStyle =
+    badgeTone === "warning" ? { background: "var(--gradient-orange)" } :
+    badgeTone === "success" ? { background: "var(--vb-navy)" } :
+    { background: "var(--vb-navy)" };
   return (
-    <div className={`group flex items-center gap-3 p-3 rounded-xl border border-border/40 bg-secondary/20 hover:bg-secondary/40 transition-colors ${pulse && badge === "47 Tage" ? "ring-1 ring-primary/40" : ""}`}>
-      <div className="h-9 w-9 rounded-lg bg-secondary border border-border/60 flex items-center justify-center shrink-0">
-        <Icon className="h-4 w-4 text-muted-foreground" />
+    <div className={`group flex items-center gap-3 p-3 rounded-lg border border-border bg-card hover:bg-secondary transition-colors ${pulse && badge === "47 Tage" ? "ring-2" : ""}`} style={pulse && badge === "47 Tage" ? { boxShadow: "0 0 0 2px var(--vb-orange)" } : undefined}>
+      <div className="h-9 w-9 rounded-lg flex items-center justify-center shrink-0" style={{ background: "var(--vb-navy)" }}>
+        <Icon className="h-4 w-4 text-white" />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-sm font-medium truncate">{title}</div>
+        <div className="text-sm font-semibold truncate" style={{ color: "var(--vb-navy)" }}>{title}</div>
         <div className="text-xs text-muted-foreground truncate">{meta}</div>
       </div>
       <div className="text-right shrink-0">
-        <div className="text-sm font-mono">{value}</div>
+        <div className="text-sm font-mono font-semibold">{value}</div>
         {badge && (
-          <span className={`inline-block mt-1 px-2 py-0.5 rounded-full border text-[10px] uppercase tracking-wider ${badgeColor}`}>{badge}</span>
+          <span className={`inline-block mt-1 px-2 py-0.5 rounded-full border text-[10px] font-bold uppercase tracking-wider ${badgeColor}`} style={badgeStyle}>{badge}</span>
         )}
       </div>
       <ChevronRight className="h-4 w-4 text-muted-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -365,11 +372,11 @@ function DossierRow({ icon: Icon, title, meta, value, badge, badgeTone, pulse }:
 function AIInsights({ active, recognized }: { active: boolean; recognized: boolean }) {
   if (!recognized) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-card/30 p-5 h-full flex flex-col items-center justify-center text-center min-h-[420px]">
-        <div className="h-10 w-10 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center mb-3">
+      <div className="rounded-xl border border-dashed border-border bg-secondary p-5 h-full flex flex-col items-center justify-center text-center min-h-[420px]">
+        <div className="h-10 w-10 rounded-lg bg-card border border-border flex items-center justify-center mb-3">
           <Sparkles className="h-4 w-4 text-muted-foreground" />
         </div>
-        <div className="text-sm text-muted-foreground">Aurea Insights</div>
+        <div className="text-sm font-bold text-muted-foreground">KI-Insights</div>
         <div className="text-[10px] uppercase tracking-wider text-muted-foreground/60 mt-1">
           {active ? "analysiert…" : "inaktiv"}
         </div>
@@ -378,15 +385,15 @@ function AIInsights({ active, recognized }: { active: boolean; recognized: boole
   }
 
   return (
-    <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent p-5 h-full" style={{ animation: "fade-up 0.5s ease-out" }}>
+    <div className="rounded-xl border-2 p-5 h-full" style={{ borderColor: "var(--vb-orange)", background: "linear-gradient(180deg, oklch(0.99 0.01 50), oklch(1 0 0))", animation: "fade-up 0.5s ease-out" }}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <Sparkles className="h-3.5 w-3.5 text-primary-foreground" />
+          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "var(--gradient-orange)" }}>
+            <Sparkles className="h-3.5 w-3.5 text-white" />
           </div>
           <div>
-            <div className="text-sm font-medium">Aurea Insights</div>
-            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Echtzeit · GPT-Banking</div>
+            <div className="text-sm font-bold" style={{ color: "var(--vb-navy)" }}>KI-Insights</div>
+            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Echtzeit · VR-Banking-KI</div>
           </div>
         </div>
       </div>
@@ -395,23 +402,23 @@ function AIInsights({ active, recognized }: { active: boolean; recognized: boole
         {insights.map((ins, i) => {
           const Icon = ins.icon;
           const color =
-            ins.tone === "warning" ? "oklch(0.85 0.15 75)" :
-            ins.tone === "accent" ? "oklch(0.7 0.18 195)" :
-            "oklch(0.85 0.13 80)";
+            ins.tone === "warning" ? "var(--vb-orange)" :
+            ins.tone === "accent" ? "var(--vb-navy)" :
+            "var(--vb-orange)";
           return (
             <div
               key={i}
-              className="rounded-xl bg-card/60 border border-border/60 p-3"
+              className="rounded-lg bg-card border border-border p-3"
               style={{ animation: active ? `fade-up 0.5s ease-out ${i * 0.4}s both` : undefined }}
             >
               <div className="flex items-start gap-2.5">
                 <Icon className="h-4 w-4 mt-0.5 shrink-0" style={{ color }} />
                 <div className="flex-1">
-                  <div className="text-sm font-medium leading-snug">{ins.title}</div>
+                  <div className="text-sm font-semibold leading-snug" style={{ color: "var(--vb-navy)" }}>{ins.title}</div>
                   <div className="text-xs text-muted-foreground mt-1 leading-relaxed">{ins.body}</div>
                 </div>
               </div>
-              <button className="mt-3 w-full inline-flex items-center justify-between text-[11px] text-foreground/80 hover:text-foreground px-2.5 py-1.5 rounded-md bg-secondary/50 border border-border/40 transition-colors">
+              <button className="mt-3 w-full inline-flex items-center justify-between text-[11px] font-semibold px-2.5 py-1.5 rounded-md bg-secondary border border-border hover:bg-card transition-colors" style={{ color: "var(--vb-navy)" }}>
                 <span>Im Gespräch nutzen</span>
                 <ArrowUpRight className="h-3 w-3" />
               </button>
@@ -420,11 +427,11 @@ function AIInsights({ active, recognized }: { active: boolean; recognized: boole
         })}
       </div>
 
-      <div className="mt-4 pt-4 border-t border-border/40">
+      <div className="mt-4 pt-4 border-t border-border">
         <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Vorgeschlagene nächste Aktion</div>
-        <button className="w-full text-left p-3 rounded-xl bg-gradient-to-r from-primary/20 to-accent/10 border border-primary/30 hover:from-primary/30 transition-colors">
-          <div className="text-sm font-medium">Termin "Hypothek-Verlängerung" vorschlagen</div>
-          <div className="text-xs text-muted-foreground mt-0.5">Mi 04.03 · 14:00 · Filiale Bahnhofstrasse</div>
+        <button className="w-full text-left p-3 rounded-lg text-white hover:opacity-95 transition-opacity" style={{ background: "var(--vb-navy)" }}>
+          <div className="text-sm font-semibold">Termin "Anschlussfinanzierung" vorschlagen</div>
+          <div className="text-xs text-white/70 mt-0.5">Mi 04.03 · 14:00 · Filiale Heidelberg Hauptstraße</div>
         </button>
       </div>
     </div>

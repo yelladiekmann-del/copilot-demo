@@ -63,40 +63,41 @@
 
 :root {
   --radius: 0.875rem;
-  /* Deep navy private-banking palette */
-  --background: oklch(0.18 0.025 250);
-  --foreground: oklch(0.97 0.005 250);
-  --card: oklch(0.215 0.028 252);
-  --card-foreground: oklch(0.97 0.005 250);
-  --popover: oklch(0.215 0.028 252);
-  --popover-foreground: oklch(0.97 0.005 250);
-  --primary: oklch(0.78 0.14 75); /* warm gold */
-  --primary-foreground: oklch(0.18 0.025 250);
-  --secondary: oklch(0.27 0.03 252);
-  --secondary-foreground: oklch(0.97 0.005 250);
-  --muted: oklch(0.25 0.025 252);
-  --muted-foreground: oklch(0.7 0.02 252);
-  --accent: oklch(0.65 0.18 195); /* electric teal */
-  --accent-foreground: oklch(0.18 0.025 250);
-  --destructive: oklch(0.65 0.22 25);
-  --destructive-foreground: oklch(0.98 0.005 250);
-  --success: oklch(0.72 0.16 155);
-  --warning: oklch(0.78 0.15 75);
-  --border: oklch(0.32 0.025 252 / 60%);
-  --input: oklch(0.32 0.025 252);
-  --ring: oklch(0.78 0.14 75);
+  /* Volksbank-inspired palette: deep navy, warm orange, neutral light surfaces */
+  --background: oklch(0.985 0.003 240);
+  --foreground: oklch(0.2 0.04 255);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.04 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.04 255);
+  --primary: oklch(0.28 0.09 258); /* Volksbank navy */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.008 240);
+  --secondary-foreground: oklch(0.28 0.09 258);
+  --muted: oklch(0.955 0.008 240);
+  --muted-foreground: oklch(0.45 0.02 255);
+  --accent: oklch(0.7 0.17 48); /* Volksbank orange */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.55 0.13 155);
+  --warning: oklch(0.7 0.17 48);
+  --border: oklch(0.9 0.01 240);
+  --input: oklch(0.9 0.01 240);
+  --ring: oklch(0.7 0.17 48);
 
-  --gradient-aurora: radial-gradient(ellipse at top left, oklch(0.35 0.12 260 / 0.5), transparent 60%),
-                     radial-gradient(ellipse at bottom right, oklch(0.4 0.14 195 / 0.35), transparent 55%),
-                     linear-gradient(180deg, oklch(0.18 0.025 250), oklch(0.16 0.03 255));
-  --gradient-gold: linear-gradient(135deg, oklch(0.85 0.13 80), oklch(0.7 0.15 60));
-  --gradient-card: linear-gradient(160deg, oklch(0.235 0.03 252 / 0.9), oklch(0.2 0.025 252 / 0.6));
-  --gradient-text: linear-gradient(120deg, oklch(0.97 0.005 250), oklch(0.78 0.14 75));
-  --shadow-glow: 0 0 60px -10px oklch(0.78 0.14 75 / 0.4);
-  --shadow-elegant: 0 30px 80px -20px oklch(0.05 0.02 250 / 0.6);
-  --shadow-card: 0 1px 0 0 oklch(1 0 0 / 0.05) inset, 0 20px 40px -20px oklch(0.05 0 0 / 0.5);
+  --vb-navy: oklch(0.28 0.09 258);
+  --vb-navy-deep: oklch(0.22 0.08 258);
+  --vb-orange: oklch(0.7 0.17 48);
+  --vb-orange-deep: oklch(0.62 0.18 42);
+
+  --gradient-hero: linear-gradient(180deg, oklch(0.28 0.09 258), oklch(0.22 0.08 258));
+  --gradient-orange: linear-gradient(135deg, oklch(0.72 0.17 50), oklch(0.62 0.18 42));
+  --shadow-card: 0 1px 2px 0 oklch(0.2 0.04 255 / 0.04), 0 8px 24px -8px oklch(0.2 0.04 255 / 0.08);
+  --shadow-elegant: 0 20px 60px -20px oklch(0.22 0.08 258 / 0.25);
+  --shadow-glow: 0 8px 24px -6px oklch(0.7 0.17 48 / 0.4);
   --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
-  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
@@ -156,57 +157,55 @@
   }
 
   body {
-    background: var(--gradient-aurora);
-    background-attachment: fixed;
+    background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    font-optical-sizing: auto;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    letter-spacing: -0.015em;
   }
 }
 
 @layer utilities {
-  .glass {
-    background: var(--gradient-card);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    border: 1px solid oklch(1 0 0 / 0.08);
+  .vb-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
     box-shadow: var(--shadow-card);
   }
-  .gold-text {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .vb-navy { background: var(--vb-navy); color: oklch(1 0 0); }
+  .vb-orange-bg { background: var(--gradient-orange); color: oklch(1 0 0); }
+  .vb-pill {
+    border-radius: 9999px;
+    padding: 0.625rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s var(--transition-smooth);
   }
-  .display-text {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .vb-pill-primary {
+    background: var(--vb-navy);
+    color: oklch(1 0 0);
   }
+  .vb-pill-primary:hover { background: var(--vb-navy-deep); }
+  .vb-pill-orange {
+    background: var(--gradient-orange);
+    color: oklch(1 0 0);
+    box-shadow: var(--shadow-glow);
+  }
+  .vb-pill-orange:hover { transform: translateY(-1px); }
   .pulse-ring {
-    box-shadow: 0 0 0 0 oklch(0.72 0.16 155 / 0.6);
+    box-shadow: 0 0 0 0 oklch(0.7 0.17 48 / 0.55);
     animation: pulse-ring 2s var(--transition-smooth) infinite;
-  }
-  .grid-bg {
-    background-image:
-      linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
   }
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 oklch(0.72 0.16 155 / 0.55); }
-  70% { box-shadow: 0 0 0 18px oklch(0.72 0.16 155 / 0); }
-  100% { box-shadow: 0 0 0 0 oklch(0.72 0.16 155 / 0); }
+  0% { box-shadow: 0 0 0 0 oklch(0.7 0.17 48 / 0.55); }
+  70% { box-shadow: 0 0 0 18px oklch(0.7 0.17 48 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(0.7 0.17 48 / 0); }
 }
 @keyframes shimmer {
   0% { background-position: -200% 0; }
