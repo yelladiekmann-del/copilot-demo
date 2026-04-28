@@ -35,30 +35,32 @@ const items = [
 
 export function ValueProps() {
   return (
-    <section id="value" className="relative max-w-7xl mx-auto px-6 py-24">
-      <div className="max-w-2xl mb-14">
-        <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-3">Mehrwert</div>
-        <h2 className="font-display text-4xl md:text-5xl font-medium leading-tight">
-          Was sich für Sie als <span className="display-text italic">Berater</span> ändert.
-        </h2>
-        <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-          Aurea wurde nicht für das Management gebaut, sondern für die Menschen, die jeden Tag mit Kunden sprechen. Hier ist, was das für Ihren Arbeitsalltag bedeutet.
-        </p>
-      </div>
+    <section id="value" className="relative bg-secondary/40 py-24 border-y border-border">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-2xl mb-14">
+          <div className="text-xs uppercase tracking-[0.25em] font-bold mb-3" style={{ color: "var(--vb-orange)" }}>Mehrwert für Berater</div>
+          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight" style={{ color: "var(--vb-navy)" }}>
+            Was sich für Sie im Arbeitsalltag ändert.
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+            Der Copilot wurde nicht für das Management gebaut, sondern für die Menschen, die jeden Tag mit Kunden sprechen.
+          </p>
+        </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it) => {
-          const Icon = it.icon;
-          return (
-            <div key={it.title} className="group glass rounded-2xl p-6 hover:border-primary/30 transition-colors">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-border/60 flex items-center justify-center mb-4 group-hover:from-primary/30 transition-colors">
-                <Icon className="h-4.5 w-4.5 text-primary" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {items.map((it) => {
+            const Icon = it.icon;
+            return (
+              <div key={it.title} className="group vb-card rounded-xl p-6 hover:shadow-[var(--shadow-elegant)] transition-shadow">
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-5" style={{ background: "var(--vb-navy)" }}>
+                  <Icon className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-xl font-bold mb-2" style={{ color: "var(--vb-navy)" }}>{it.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{it.body}</p>
               </div>
-              <h3 className="font-display text-xl mb-2">{it.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{it.body}</p>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );

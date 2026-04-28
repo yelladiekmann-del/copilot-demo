@@ -17,8 +17,15 @@ function Index() {
       <ValueProps />
       <Metrics />
       <CTA />
-      <footer className="border-t border-border/40 py-10 text-center text-xs text-muted-foreground">
-        © 2026 Aurea Intelligence · Enterprise-Grade · ISO 27001 · FINMA-konform
+      <footer className="vb-navy py-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4 text-xs text-white/70">
+          <div>© 2026 Volksbank Kurpfalz eG · Berater-Copilot Pilotprogramm</div>
+          <div className="flex gap-5">
+            <a href="#" className="hover:text-white">Impressum</a>
+            <a href="#" className="hover:text-white">Datenschutz</a>
+            <a href="#" className="hover:text-white">BaFin-Compliance</a>
+          </div>
+        </div>
       </footer>
     </main>
   );
