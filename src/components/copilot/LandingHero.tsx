@@ -5,12 +5,7 @@ export function LandingHero() {
     <>
       {/* Top utility bar — dark navy */}
       <div className="vb-navy">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-11 text-sm">
-          <div className="flex items-center gap-7">
-            {["Privatkunden", "Firmenkunden", "Private Banking", "Banking & Verträge", "Meine Bank", "Service & Mehrwerte", "Karriere"].map((l, i) => (
-              <a key={l} href="#" className={`hover:text-white/90 transition-colors ${i === 1 ? "text-white font-semibold" : "text-white/85"}`}>{l}</a>
-            ))}
-          </div>
+        <div className="max-w-7xl mx-auto flex items-center justify-end px-6 h-11 text-sm">
           <button className="flex items-center gap-1.5 text-white/90 hover:text-white">
             <Search className="h-4 w-4" />
             <span>Suchen</span>
