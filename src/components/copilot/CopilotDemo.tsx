@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Phone, PhoneIncoming, Mic, MicOff, PauseCircle, MoreHorizontal,
+  Phone, PhoneIncoming, Mic, PauseCircle, MoreHorizontal,
   TrendingUp, AlertCircle, Sparkles, FileText, ArrowUpRight,
-  Calendar, Wallet, Home, Briefcase, ChevronRight, CheckCircle2
+  Calendar, Wallet, Home, Briefcase, ChevronRight, CheckCircle2,
+  Search, Database, UserCheck, Loader2
 } from "lucide-react";
 
 const transcriptScript = [
@@ -18,11 +19,23 @@ const insights = [
   { icon: Sparkles, tone: "primary", title: "Empfohlener Gesprächseinstieg", body: "Auf SARON-Modell verweisen — Profil passt (langfr. Horizont)" },
 ];
 
+type CallPhase = "idle" | "ringing" | "active";
+
+const recognitionSteps = [
+  { icon: Search, label: "Nummer im CRM abgleichen", source: "Salesforce" },
+  { icon: UserCheck, label: "Identität verifiziert", source: "Marina Keller · KundenID 884291" },
+  { icon: Database, label: "Kernbankendaten laden", source: "Avaloq · 3 Konten · 1 Hypothek" },
+  { icon: Sparkles, label: "Kontext aufbereitet", source: "Letzte Interaktion · offene Themen" },
+];
+
 export function CopilotDemo() {
-  const [callActive, setCallActive] = useState(false);
+  const [phase, setPhase] = useState<CallPhase>("idle");
+  const [recogStep, setRecogStep] = useState(0);
   const [duration, setDuration] = useState(0);
   const [visibleLines, setVisibleLines] = useState(0);
   const timerRef = useRef<number | null>(null);
+  const callActive = phase === "active";
+  const recognized = phase === "active";
 
   useEffect(() => {
     if (!callActive) {
@@ -42,6 +55,20 @@ export function CopilotDemo() {
     return () => clearTimeout(t);
   }, [callActive, visibleLines]);
 
+  // Ringing → recognition cascade → active
+  useEffect(() => {
+    if (phase !== "ringing") {
+      setRecogStep(0);
+      return;
+    }
+    const timeouts: number[] = [];
+    recognitionSteps.forEach((_, i) => {
+      timeouts.push(window.setTimeout(() => setRecogStep(i + 1), 600 + i * 700));
+    });
+    timeouts.push(window.setTimeout(() => setPhase("active"), 600 + recognitionSteps.length * 700 + 400));
+    return () => timeouts.forEach((t) => window.clearTimeout(t));
+  }, [phase]);
+
   const mm = String(Math.floor(duration / 60)).padStart(2, "0");
   const ss = String(duration % 60).padStart(2, "0");
 
@@ -50,7 +77,7 @@ export function CopilotDemo() {
       <div className="text-center mb-10">
         <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-3">Live-Simulation</div>
         <h2 className="font-display text-4xl md:text-5xl font-medium">Sehen Sie den Copilot in Aktion</h2>
-        <p className="mt-3 text-muted-foreground">Klicken Sie auf "Anruf annehmen" — Aurea baut das Dossier in Echtzeit auf.</p>
+        <p className="mt-3 text-muted-foreground">Klicken Sie auf "Eingehender Anruf" — sehen Sie zu, wie Aurea die Nummer erkennt und das Dossier aufbaut.</p>
       </div>
 
       <div className="glass rounded-3xl p-3 md:p-5 shadow-[var(--shadow-elegant)]">
@@ -69,8 +96,9 @@ export function CopilotDemo() {
           {/* LEFT: Call panel */}
           <div className="col-span-12 lg:col-span-4 flex flex-col gap-4">
             <CallPanel
-              callActive={callActive}
-              setCallActive={setCallActive}
+              phase={phase}
+              setPhase={setPhase}
+              recogStep={recogStep}
               duration={`${mm}:${ss}`}
             />
             <Transcript visible={visibleLines} active={callActive} />
@@ -78,12 +106,12 @@ export function CopilotDemo() {
 
           {/* CENTER: Dossier */}
           <div className="col-span-12 lg:col-span-5">
-            <Dossier active={callActive} />
+            <Dossier active={callActive} recognized={recognized} />
           </div>
 
           {/* RIGHT: AI insights */}
           <div className="col-span-12 lg:col-span-3">
-            <AIInsights active={callActive} />
+            <AIInsights active={callActive} recognized={recognized} />
           </div>
         </div>
       </div>
@@ -91,24 +119,87 @@ export function CopilotDemo() {
   );
 }
 
-function CallPanel({ callActive, setCallActive, duration }: { callActive: boolean; setCallActive: (v: boolean) => void; duration: string }) {
+function CallPanel({ phase, setPhase, recogStep, duration }: { phase: CallPhase; setPhase: (v: CallPhase) => void; recogStep: number; duration: string }) {
+  const callActive = phase === "active";
+  const ringing = phase === "ringing";
+  const idle = phase === "idle";
+
   return (
     <div className="rounded-2xl bg-secondary/40 border border-border/60 p-5">
       <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
         <span className="flex items-center gap-1.5">
           <PhoneIncoming className="h-3.5 w-3.5" />
-          {callActive ? "Aktiver Anruf" : "Eingehender Anruf"}
+          {callActive ? "Aktiver Anruf" : ringing ? "Anruf eingehend…" : "Bereit"}
         </span>
         <span className="font-mono">{duration}</span>
       </div>
 
       <div className="flex flex-col items-center text-center py-3">
-        <div className={`relative h-20 w-20 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 border border-primary/40 flex items-center justify-center mb-4 ${callActive ? "" : "pulse-ring"}`}>
-          <span className="font-display text-2xl gold-text">MK</span>
+        <div className={`relative h-20 w-20 rounded-full border flex items-center justify-center mb-4 transition-all duration-500 ${
+          idle
+            ? "bg-secondary/60 border-border/60"
+            : callActive
+            ? "bg-gradient-to-br from-primary/30 to-accent/30 border-primary/40"
+            : "bg-secondary border-primary/30 pulse-ring"
+        }`}>
+          {idle || ringing ? (
+            <Phone className={`h-7 w-7 ${ringing ? "text-primary animate-pulse" : "text-muted-foreground"}`} />
+          ) : (
+            <span className="font-display text-2xl gold-text" style={{ animation: "fade-up 0.5s ease-out" }}>MK</span>
+          )}
         </div>
-        <div className="font-display text-lg">Marina Keller</div>
-        <div className="text-xs text-muted-foreground mt-0.5">Premium · Kundin seit 2014</div>
-        <div className="text-[11px] font-mono text-muted-foreground mt-1">+41 79 412 88 03</div>
+
+        {/* Number & identity */}
+        <div className="font-mono text-sm tracking-wider">+41 79 412 88 03</div>
+        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
+          {idle ? "Keine Verbindung" : ringing ? "Nummer wird erkannt…" : "Identität verifiziert"}
+        </div>
+
+        <div className="mt-3 min-h-[44px]">
+          {callActive && (
+            <div style={{ animation: "fade-up 0.4s ease-out" }}>
+              <div className="font-display text-lg">Marina Keller</div>
+              <div className="text-xs text-muted-foreground mt-0.5">Premium · Kundin seit 2014</div>
+            </div>
+          )}
+          {ringing && (
+            <div className="text-xs text-muted-foreground italic">Abgleich mit CRM & Kernbank läuft…</div>
+          )}
+        </div>
+
+        {/* Recognition cascade */}
+        {ringing && (
+          <div className="mt-4 w-full space-y-1.5 text-left" style={{ animation: "fade-up 0.4s ease-out" }}>
+            {recognitionSteps.map((s, i) => {
+              const Icon = s.icon;
+              const done = i < recogStep;
+              const active = i === recogStep;
+              const pending = i > recogStep;
+              return (
+                <div
+                  key={i}
+                  className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg border text-[11px] transition-all ${
+                    done ? "bg-secondary/30 border-border/40 text-muted-foreground" :
+                    active ? "bg-primary/10 border-primary/30 text-foreground" :
+                    "bg-transparent border-transparent text-muted-foreground/40"
+                  }`}
+                >
+                  <span className="h-5 w-5 rounded-md flex items-center justify-center shrink-0">
+                    {done ? <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "oklch(0.72 0.16 155)" }} /> :
+                     active ? <Loader2 className="h-3.5 w-3.5 text-primary animate-spin" /> :
+                     <Icon className="h-3.5 w-3.5" />}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="truncate">{s.label}</div>
+                    {(done || active) && !pending && (
+                      <div className="font-mono text-[9px] text-muted-foreground/80 truncate">{s.source}</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         {callActive ? (
           <div className="mt-5 flex items-center gap-2">
@@ -118,22 +209,26 @@ function CallPanel({ callActive, setCallActive, duration }: { callActive: boolea
             <button className="h-11 w-11 rounded-full bg-secondary border border-border flex items-center justify-center hover:bg-secondary/70">
               <PauseCircle className="h-4 w-4" />
             </button>
-            <button onClick={() => setCallActive(false)} className="h-11 px-5 rounded-full bg-[oklch(0.6_0.22_25)] text-white text-sm font-medium hover:opacity-90">
+            <button onClick={() => setPhase("idle")} className="h-11 px-5 rounded-full bg-[oklch(0.6_0.22_25)] text-white text-sm font-medium hover:opacity-90">
               Auflegen
             </button>
           </div>
-        ) : (
+        ) : idle ? (
           <button
-            onClick={() => setCallActive(true)}
+            onClick={() => setPhase("ringing")}
             className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[oklch(0.72_0.16_155)] text-white text-sm font-medium hover:opacity-90 shadow-lg pulse-ring"
           >
             <Phone className="h-4 w-4" />
-            Anruf annehmen
+            Eingehender Anruf
           </button>
+        ) : (
+          <div className="mt-6 text-[11px] text-muted-foreground font-mono">
+            verbinde…
+          </div>
         )}
 
         {callActive && (
-          <div className="mt-5 flex items-center gap-1 h-8">
+          <div className="mt-5 flex items-end gap-1 h-8">
             {Array.from({ length: 24 }).map((_, i) => (
               <span
                 key={i}
@@ -175,9 +270,21 @@ function Transcript({ visible, active }: { visible: number; active: boolean }) {
   );
 }
 
-function Dossier({ active }: { active: boolean }) {
+function Dossier({ active, recognized }: { active: boolean; recognized: boolean }) {
+  if (!recognized) {
+    return (
+      <div className="rounded-2xl bg-card/40 border border-dashed border-border/60 p-8 h-full flex flex-col items-center justify-center text-center min-h-[420px]">
+        <div className="h-12 w-12 rounded-2xl bg-secondary/60 border border-border/60 flex items-center justify-center mb-4">
+          {active ? <Loader2 className="h-5 w-5 text-primary animate-spin" /> : <Database className="h-5 w-5 text-muted-foreground" />}
+        </div>
+        <div className="font-display text-lg text-muted-foreground">Wartet auf Anruf</div>
+        <div className="text-xs text-muted-foreground/70 mt-2 max-w-xs">Sobald eine Nummer erkannt ist, erscheint hier das vollständige Kundendossier — automatisch und in Echtzeit.</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-2xl bg-card/60 border border-border/60 p-5 h-full">
+    <div className="rounded-2xl bg-card/60 border border-border/60 p-5 h-full" style={{ animation: "fade-up 0.5s ease-out" }}>
       <div className="flex items-start justify-between mb-5">
         <div>
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Kundendossier</div>
@@ -255,9 +362,23 @@ function DossierRow({ icon: Icon, title, meta, value, badge, badgeTone, pulse }:
   );
 }
 
-function AIInsights({ active }: { active: boolean }) {
+function AIInsights({ active, recognized }: { active: boolean; recognized: boolean }) {
+  if (!recognized) {
+    return (
+      <div className="rounded-2xl border border-dashed border-border/60 bg-card/30 p-5 h-full flex flex-col items-center justify-center text-center min-h-[420px]">
+        <div className="h-10 w-10 rounded-xl bg-secondary/60 border border-border/60 flex items-center justify-center mb-3">
+          <Sparkles className="h-4 w-4 text-muted-foreground" />
+        </div>
+        <div className="text-sm text-muted-foreground">Aurea Insights</div>
+        <div className="text-[10px] uppercase tracking-wider text-muted-foreground/60 mt-1">
+          {active ? "analysiert…" : "inaktiv"}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent p-5 h-full">
+    <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent p-5 h-full" style={{ animation: "fade-up 0.5s ease-out" }}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
