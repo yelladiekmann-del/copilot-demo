@@ -1,12 +1,36 @@
-import { Clock, Layers, Shield, Brain, Zap, Users } from "lucide-react";
+import { Clock, Layers, Brain, Zap, Smile, Award } from "lucide-react";
 
 const items = [
-  { icon: Clock, title: "Vorbereitung in 0 Sekunden", body: "Kein Suchen, kein Wechseln zwischen Systemen. Das Dossier ist da, bevor das Telefon zum zweiten Mal klingelt." },
-  { icon: Layers, title: "Eine Oberfläche statt sieben", body: "Telefonie, CRM, Kernbank, Kalender und Dokumente — vereint in einem fokussierten Berater-Workspace." },
-  { icon: Brain, title: "Beratungsthemen vorgeschlagen", body: "Aurea erkennt Anlässe, Cross-Sell-Chancen und auslaufende Verträge — kontextsensitiv und proaktiv." },
-  { icon: Shield, title: "On-Premise & FINMA-konform", body: "Daten verlassen Ihr Rechenzentrum nicht. Audit-Logs, RBAC, Verschlüsselung — Enterprise von Tag eins." },
-  { icon: Zap, title: "Schluss mit Schatten-KI", body: "Mitarbeitende greifen nicht mehr zu privaten Tools. Eine sichere, integrierte Lösung im offiziellen Stack." },
-  { icon: Users, title: "Konsistenz über alle Berater", body: "Jede Kundin erlebt das gleiche professionelle Niveau — unabhängig davon, wer am Telefon ist." },
+  {
+    icon: Smile,
+    title: "Souverän in jedes Gespräch",
+    body: "Nie wieder das Gefühl, schlecht vorbereitet zu sein. Sie kennen Ihren Kunden in dem Moment, in dem Sie abnehmen — Name, Anliegen, Historie. Das gibt Sicherheit.",
+  },
+  {
+    icon: Clock,
+    title: "Kein Vor- und Nachbereiten mehr",
+    body: "Bis zu 90 Minuten täglich, die Sie heute mit Suchen in sieben Systemen verbringen, gewinnen Sie zurück — für echte Beratung statt Klick-Arbeit.",
+  },
+  {
+    icon: Layers,
+    title: "Ein Workspace, kein Tab-Chaos",
+    body: "Telefonie, CRM, Kernbank und Notizen in einer fokussierten Oberfläche. Schluss mit zehn offenen Fenstern und der ständigen Angst, etwas zu übersehen.",
+  },
+  {
+    icon: Brain,
+    title: "Der Copilot, der mitdenkt",
+    body: "Aurea schlägt Themen vor, die Sie sonst übersehen würden: auslaufende Verträge, ungenutzte Vorsorge, passende Anlässe. Sie entscheiden — der Copilot erinnert.",
+  },
+  {
+    icon: Award,
+    title: "Mehr Erfolg, mehr Bonus",
+    body: "Berater im Pilot erreichen +34% Cross-Sell-Quote. Bessere Vorbereitung führt zu besseren Abschlüssen — und das wirkt sich direkt auf Ihre Zielerreichung aus.",
+  },
+  {
+    icon: Zap,
+    title: "Endlich legitime KI im Arbeitsalltag",
+    body: "Schluss mit dem heimlichen Wechsel zu privaten Tools. Aurea ist im offiziellen Stack — Sie nutzen modernste KI, ohne Compliance-Bauchschmerzen.",
+  },
 ];
 
 export function ValueProps() {
@@ -15,10 +39,10 @@ export function ValueProps() {
       <div className="max-w-2xl mb-14">
         <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-3">Mehrwert</div>
         <h2 className="font-display text-4xl md:text-5xl font-medium leading-tight">
-          Aus reaktiv wird <span className="display-text italic">vorausschauend.</span>
+          Was sich für Sie als <span className="display-text italic">Berater</span> ändert.
         </h2>
         <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-          Aurea verändert nicht nur, wie Berater arbeiten — es verändert, wie Kunden Ihre Bank erleben.
+          Aurea wurde nicht für das Management gebaut, sondern für die Menschen, die jeden Tag mit Kunden sprechen. Hier ist, was das für Ihren Arbeitsalltag bedeutet.
         </p>
       </div>
 
