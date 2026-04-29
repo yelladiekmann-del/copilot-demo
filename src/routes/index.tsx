@@ -14,17 +14,12 @@ function Index() {
     <main className="min-h-screen">
       <LandingHero />
       <CopilotDemo />
-      <ValueProps />
       <Metrics />
+      <ValueProps />
       <CTA />
       <footer className="vb-navy py-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4 text-xs text-white/70">
-          <div>© 2026 Volksbank Kurpfalz eG · Berater-Copilot Pilotprogramm</div>
-          <div className="flex gap-5">
-            <a href="#" className="hover:text-white">Impressum</a>
-            <a href="#" className="hover:text-white">Datenschutz</a>
-            <a href="#" className="hover:text-white">BaFin-Compliance</a>
-          </div>
+        <div className="max-w-7xl mx-auto px-6 text-xs text-white/70">
+          Demo-Mockup · Volksbank Kurpfalz eG
         </div>
       </footer>
     </main>
