@@ -737,3 +737,73 @@ function AIInsights({ scenario, recognized, visibleInsights, ended }: { scenario
     </div>
   );
 }
+
+function CustomerHistory({ items }: { items: HistoryItem[] }) {
+  const [expanded, setExpanded] = useState(false);
+  const visible = expanded ? items : items.slice(0, 3);
+  return (
+    <div className="mb-5 rounded-xl border-2 p-4" style={{ borderColor: "var(--vb-orange)", background: "linear-gradient(180deg, oklch(0.99 0.012 50), oklch(1 0 0))" }}>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <div className="h-7 w-7 rounded-lg flex items-center justify-center" style={{ background: "var(--gradient-orange)" }}>
+            <History className="h-3.5 w-3.5 text-white" />
+          </div>
+          <div>
+            <div className="text-sm font-bold" style={{ color: "var(--vb-navy)" }}>Kundenhistorie</div>
+            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
+              {items.length} Ereignisse · automatisch zusammengeführt aus CRM, Postbox, Kernbank
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative pl-4">
+        {/* timeline rail */}
+        <div className="absolute left-[7px] top-1 bottom-1 w-px bg-border" />
+        <div className="space-y-3">
+          {visible.map((it, i) => {
+            const Icon = it.icon;
+            return (
+              <div key={i} className="relative">
+                <div
+                  className="absolute -left-4 top-1.5 h-3 w-3 rounded-full border-2 bg-card"
+                  style={{ borderColor: it.highlight ? "var(--vb-orange)" : "var(--vb-navy)" }}
+                />
+                <div className={`flex items-start gap-3 rounded-lg p-2.5 ${it.highlight ? "bg-card border-2" : "bg-card/60 border border-border"}`} style={it.highlight ? { borderColor: "var(--vb-orange)" } : undefined}>
+                  <div className="h-7 w-7 rounded-lg flex items-center justify-center shrink-0" style={{ background: it.highlight ? "var(--gradient-orange)" : "var(--vb-navy)" }}>
+                    <Icon className="h-3.5 w-3.5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm font-semibold" style={{ color: "var(--vb-navy)" }}>{it.title}</span>
+                      {it.highlight && (
+                        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded text-white" style={{ background: "var(--vb-orange)" }}>
+                          relevant heute
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{it.detail}</div>
+                    <div className="text-[10px] font-mono text-muted-foreground/70 mt-1">
+                      {it.date} · {it.daysAgo} · {it.channel}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {items.length > 3 && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-3 w-full text-xs font-semibold py-2 rounded-lg bg-secondary border border-border hover:bg-card transition-colors flex items-center justify-center gap-1"
+          style={{ color: "var(--vb-navy)" }}
+        >
+          {expanded ? "Weniger anzeigen" : `Alle ${items.length} Ereignisse anzeigen`}
+          <ChevronRight className={`h-3 w-3 transition-transform ${expanded ? "rotate-90" : ""}`} />
+        </button>
+      )}
+    </div>
+  );
+}
