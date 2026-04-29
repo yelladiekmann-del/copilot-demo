@@ -23,8 +23,8 @@ const items = [
   },
   {
     icon: Award,
-    title: "Mehr Erfolg, mehr Bonus",
-    body: "Berater im Pilot erreichen +34% Cross-Sell-Quote. Bessere Vorbereitung führt zu besseren Abschlüssen — und das wirkt sich direkt auf Ihre Zielerreichung aus.",
+    title: "Bessere Abschlüsse, weniger Zufall",
+    body: "Wer den Kunden kennt, verkauft passender. Der Copilot erinnert an Anlässe, die im Alltag oft untergehen — und macht Cross-Sell zur natürlichen Folge guter Beratung.",
   },
   {
     icon: Zap,

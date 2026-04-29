@@ -7,14 +7,15 @@ export function CTA() {
         Bereit für den <span style={{ color: "var(--vb-orange)" }}>Pilot?</span>
       </h2>
       <p className="mt-5 text-muted-foreground text-lg max-w-xl mx-auto">
-        Lassen Sie uns gemeinsam evaluieren, wie der Berater-Copilot in Ihre bestehende Systemlandschaft passt — unverbindlich und in einem ersten Gespräch.
+        Sie möchten den Berater-Copilot in Ihrer Bank ausprobieren?
+        Sprechen wir über Ihre Systemlandschaft und einen möglichen ersten Use Case.
       </p>
       <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
         <a className="vb-pill vb-pill-orange inline-flex items-center gap-2" href="#">
           Gespräch vereinbaren <ArrowRight className="h-4 w-4" />
         </a>
-        <a className="vb-pill vb-pill-primary inline-flex items-center gap-2" href="#">
-          Mehr Informationen
+        <a className="vb-pill vb-pill-primary inline-flex items-center gap-2" href="#demo">
+          Demo erneut ansehen
         </a>
       </div>
     </section>
