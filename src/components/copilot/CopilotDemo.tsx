@@ -89,11 +89,11 @@ const sBaufi: Scenario = {
   ],
   insights: [
     { t: 6, tone: "warning", icon: AlertCircle, title: "Zinsbindung läuft in 47 Tagen aus", body: "320 T€ · 1,45 % · Forward-Darlehen jetzt sinnvoll" },
-    { t: 12, tone: "accent", icon: History, title: "Aus letzter Beratung (07.11.2025)", body: "C. Müller hat „Anschlussfinanzierung Q1/2026" als Folgethema vermerkt — genau das Anliegen heute." },
+    { t: 12, tone: "accent", icon: History, title: "Aus letzter Beratung (07.11.2025)", body: "C. Müller hat ›Anschlussfinanzierung Q1/2026" als Folgethema vermerkt — genau das Anliegen heute." },
     { t: 18, tone: "primary", icon: Sparkles, title: "Gesprächseinstieg", body: "Festgeld 2,40 % erwähnen — passt zum Liquiditätsprofil" },
   ],
   history: [
-    { date: "07.11.2025", daysAgo: "vor 4 Mo.", channel: "Termin", icon: Calendar, title: "Beratung Altersvorsorge", detail: "Mit C. Müller · Folgethema notiert: „Anschlussfinanzierung Q1/2026"", highlight: true },
+    { date: "07.11.2025", daysAgo: "vor 4 Mo.", channel: "Termin", icon: Calendar, title: "Beratung Altersvorsorge", detail: "Mit C. Müller · Folgethema notiert: ›Anschlussfinanzierung Q1/2026"", highlight: true },
     { date: "22.08.2025", daysAgo: "vor 7 Mo.", channel: "E-Mail", icon: Mail, title: "Steuerbescheinigung 2024 angefordert", detail: "Versendet · per Postbox" },
     { date: "14.05.2025", daysAgo: "vor 10 Mo.", channel: "Telefon", icon: Phone, title: "Rückruf wegen Tagesgeld-Konditionen", detail: "Information gegeben · keine Aktion gewünscht" },
     { date: "03.03.2024", daysAgo: "vor 2 J.", channel: "Lebensereignis", icon: Home, title: "Hauskauf Heidelberg", detail: "Baufinanzierung 320 T€ · Festzins 1,45 % · 10 J." },
@@ -139,13 +139,13 @@ const sVorsorge: Scenario = {
   ],
   insights: [
     { t: 7, tone: "warning", icon: AlertCircle, title: "Vorsorgelücke erkannt", body: "Keine private Rente · Familienzuwachs verstärkt Bedarf" },
-    { t: 13, tone: "accent", icon: History, title: "Erinnerung aus 2023", body: "Damals selbst angefragt: „Vorsorge bei Familienzuwachs prüfen". Anlass ist jetzt eingetreten." },
+    { t: 13, tone: "accent", icon: History, title: "Erinnerung aus 2023", body: "Damals selbst angefragt: ›Vorsorge bei Familienzuwachs prüfen". Anlass ist jetzt eingetreten." },
     { t: 19, tone: "primary", icon: Sparkles, title: "Tipp", body: "Risikolebensversicherung ergänzend anbieten" },
   ],
   history: [
     { date: "vor 3 Wochen", daysAgo: "21 Tage", channel: "Lebensereignis", icon: Baby, title: "Zweites Kind geboren", detail: "Aus Postbox-Mitteilung erkannt · Kindergeldkonto eröffnet", highlight: true },
-    { date: "12.02.2024", daysAgo: "vor 1 J.", channel: "Chat", icon: MessageSquare, title: "Frage zu Riester", detail: "„Lohnt sich das mit einem Kind?" · Beantwortet, keine Folgeaktion" },
-    { date: "08.09.2023", daysAgo: "vor 2 J.", channel: "Termin", icon: Calendar, title: "Erstberatung Vorsorge", detail: "Notiz: „Bei Familienzuwachs erneut prüfen" — exakt jetzt der Anlass", highlight: true },
+    { date: "12.02.2024", daysAgo: "vor 1 J.", channel: "Chat", icon: MessageSquare, title: "Frage zu Riester", detail: "›Lohnt sich das mit einem Kind?" · Beantwortet, keine Folgeaktion" },
+    { date: "08.09.2023", daysAgo: "vor 2 J.", channel: "Termin", icon: Calendar, title: "Erstberatung Vorsorge", detail: "Notiz: ›Bei Familienzuwachs erneut prüfen" — exakt jetzt der Anlass", highlight: true },
     { date: "15.04.2022", daysAgo: "vor 3 J.", channel: "Lebensereignis", icon: Gift, title: "Erstes Kind geboren", detail: "Kontoeröffnung Junior-Sparen" },
     { date: "03.07.2019", daysAgo: "vor 6 J.", channel: "Lebensereignis", icon: Heart, title: "Konto eröffnet", detail: "Empfehlung über Arbeitgeber" },
   ],
@@ -191,11 +191,11 @@ const sFirma: Scenario = {
   ],
   insights: [
     { t: 4, tone: "accent", icon: TrendingUp, title: "Förderfähig", body: "KfW 295 für Investitionen — bis 80 % refinanzierbar" },
-    { t: 10, tone: "warning", icon: History, title: "Aus dem Jahresgespräch (Jan. 2026)", body: "Becker erwähnte Investitionsplan „2 Maschinen ab Q2" — heute der konkrete Anlass." },
+    { t: 10, tone: "warning", icon: History, title: "Aus dem Jahresgespräch (Jan. 2026)", body: "Becker erwähnte Investitionsplan ›2 Maschinen ab Q2" — heute der konkrete Anlass." },
     { t: 16, tone: "primary", icon: Sparkles, title: "Cross-Sell", body: "Leasing als Alternative — schont Liquidität" },
   ],
   history: [
-    { date: "18.01.2026", daysAgo: "vor 6 Wo.", channel: "Termin", icon: Calendar, title: "Jahresgespräch Firmenkunde", detail: "Besprochen: Investitionsplan „2 Maschinen Q2/2026" · BWA 2024 vorgelegt", highlight: true },
+    { date: "18.01.2026", daysAgo: "vor 6 Wo.", channel: "Termin", icon: Calendar, title: "Jahresgespräch Firmenkunde", detail: "Besprochen: Investitionsplan ›2 Maschinen Q2/2026" · BWA 2024 vorgelegt", highlight: true },
     { date: "11.11.2025", daysAgo: "vor 4 Mo.", channel: "E-Mail", icon: Mail, title: "Kontoauszüge Q3 angefordert", detail: "Versendet" },
     { date: "20.06.2025", daysAgo: "vor 9 Mo.", channel: "Telefon", icon: Phone, title: "Erweiterung Kontokorrent-Linie", detail: "Linie auf 200 T€ erhöht · Auslastung aktuell 55 %" },
     { date: "14.03.2024", daysAgo: "vor 2 J.", channel: "Termin", icon: Calendar, title: "Maschinenfinanzierung CNC #1", detail: "180 T€ · KfW 295 · läuft 6 weitere Jahre" },
