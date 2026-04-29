@@ -24,18 +24,19 @@ export function LandingHero() {
         </div>
       </div>
 
-      {/* Hero banner — dark image-style block */}
+      {/* Hero banner — dark with aurora */}
       <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: "radial-gradient(circle at 20% 30%, oklch(0.7 0.17 48 / 0.4), transparent 40%), radial-gradient(circle at 80% 70%, oklch(0.4 0.1 258 / 0.5), transparent 50%)"
-        }} />
+        <div className="absolute inset-0 grid-bg-dark opacity-50" />
+        <div className="aurora-blob h-[520px] w-[520px] -top-32 -right-32 animate-aurora" style={{ background: "oklch(0.7 0.17 48 / 0.55)" }} />
+        <div className="aurora-blob h-[420px] w-[420px] bottom-[-60px] -left-32 animate-aurora" style={{ background: "oklch(0.45 0.12 258 / 0.7)", animationDelay: "-6s" }} />
+        <div className="aurora-blob h-[300px] w-[300px] top-1/3 left-1/2 animate-aurora" style={{ background: "oklch(0.7 0.17 48 / 0.25)", animationDelay: "-12s" }} />
         <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs text-white/90 mb-6 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" style={{ background: "var(--vb-orange)" }} />
               Konzept-Demo für Beraterinnen und Berater
             </div>
-            <h1 className="text-white text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight">
+            <h1 className="font-display text-white text-5xl md:text-7xl font-semibold leading-[1.04]">
               KUNDE RUFT AN:<br />
               <span style={{ color: "var(--vb-orange)" }}>SIE WISSEN BESCHEID.</span>
             </h1>
