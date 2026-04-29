@@ -611,6 +611,7 @@ function Dossier({ scenario, recognized, visibleFields, active }: { scenario: Sc
           <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Kundendossier</div>
           <h3 className="font-display text-2xl font-semibold mt-1" style={{ color: "var(--vb-navy)" }}>{scenario.name}</h3>
           <div className="text-xs text-muted-foreground mt-1">{scenario.meta}</div>
+          <div className="text-[11px] mt-1 font-semibold" style={{ color: "var(--vb-orange)" }}>{scenario.relationshipSince}</div>
         </div>
         <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white shrink-0" style={{ background: "var(--gradient-orange)" }}>
           {scenario.badge}
@@ -626,6 +627,9 @@ function Dossier({ scenario, recognized, visibleFields, active }: { scenario: Sc
           </div>
         ))}
       </div>
+
+      {/* Customer history / timeline */}
+      <CustomerHistory items={scenario.history} />
 
       <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Beratungsbogen — füllt sich live</div>
       <div className="space-y-2">
