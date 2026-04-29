@@ -89,7 +89,7 @@ const sBaufi: Scenario = {
   ],
   insights: [
     { t: 6, tone: "warning", icon: AlertCircle, title: "Zinsbindung läuft in 47 Tagen aus", body: "320 T€ · 1,45 % · Forward-Darlehen jetzt sinnvoll" },
-    { t: 12, tone: "accent", icon: History, title: "Aus letzter Beratung (07.11.2025)", body: "C. Müller hat ›Anschlussfinanzierung Q1/2026‹ als Folgethema vermerkt — genau das Anliegen heute." },
+    { t: 12, tone: "accent", icon: History, title: "Aus letzter Beratung (07.11.2025)", body: "C. Müller hat 'Anschlussfinanzierung Q1/2026' als Folgethema vermerkt — genau das Anliegen heute." },
     { t: 18, tone: "primary", icon: Sparkles, title: "Gesprächseinstieg", body: "Festgeld 2,40 % erwähnen — passt zum Liquiditätsprofil" },
   ],
   history: [
