@@ -79,7 +79,7 @@ const sBaufi: Scenario = {
     { t: 12, tone: "accent", icon: TrendingUp, title: "Cross-Sell-Chance", body: "VR Riester nicht voll ausgeschöpft (ca. 1.800 € möglich)" },
     { t: 18, tone: "primary", icon: Sparkles, title: "Gesprächseinstieg", body: "Festgeld 2,40 % erwähnen — passt zum Liquiditätsprofil" },
   ],
-  nextAction: { title: "Termin „Anschlussfinanzierung" vorschlagen", sub: "Mi 04.03 · 14:00 · Filiale Heidelberg" },
+  nextAction: { title: "Termin Anschlussfinanzierung vorschlagen", sub: "Mi 04.03 · 14:00 · Filiale Heidelberg" },
 };
 
 const sVorsorge: Scenario = {
@@ -121,7 +121,7 @@ const sVorsorge: Scenario = {
     { t: 13, tone: "accent", icon: TrendingUp, title: "Riester voll förderfähig", body: "2 Kinder · max. Zulage 925 €/Jahr möglich" },
     { t: 19, tone: "primary", icon: Sparkles, title: "Tipp", body: "Risikolebensversicherung ergänzend anbieten" },
   ],
-  nextAction: { title: "Termin „Vorsorge & Familienschutz"", sub: "Di 10.03 · 17:30 · Filiale Mannheim" },
+  nextAction: { title: "Termin Vorsorge & Familienschutz", sub: "Di 10.03 · 17:30 · Filiale Mannheim" },
 };
 
 const sFirma: Scenario = {
