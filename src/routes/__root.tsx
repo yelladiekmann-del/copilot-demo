@@ -29,14 +29,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aurea — KI-Berater-Copilot für Banken" },
+      { title: "KI-Berater-Copilot für Banken" },
       { name: "description", content: "Echtzeit-Kundendossier für Telefonat und Beratung. KI-gestützter Copilot für Bankberater — Kontext in Sekunden, statt Minuten." },
       { name: "author", content: "Aurea" },
-      { property: "og:title", content: "Aurea — KI-Berater-Copilot" },
-      { property: "og:description", content: "Live-Kundendossier für jedes Gespräch. Telefonie, CRM und Kernbank in einer Oberfläche." },
+      { property: "og:title", content: "KI-Berater-Copilot für Banken" },
+      { property: "og:description", content: "Echtzeit-Kundendossier für Telefonat und Beratung. KI-gestützter Copilot für Bankberater — Kontext in Sekunden, statt Minuten." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "KI-Berater-Copilot für Banken" },
+      { name: "twitter:description", content: "Echtzeit-Kundendossier für Telefonat und Beratung. KI-gestützter Copilot für Bankberater — Kontext in Sekunden, statt Minuten." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c5f6439b-8201-4490-9167-19e3936c8ede/id-preview-3266609d--a1a74d7e-a647-444d-9708-444f2d1aade2.lovable.app-1777470908241.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c5f6439b-8201-4490-9167-19e3936c8ede/id-preview-3266609d--a1a74d7e-a647-444d-9708-444f2d1aade2.lovable.app-1777470908241.png" },
     ],
     links: [
       {
