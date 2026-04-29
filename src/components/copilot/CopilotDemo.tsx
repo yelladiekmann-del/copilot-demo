@@ -77,7 +77,11 @@ export function CopilotDemo() {
       <div className="text-center mb-10">
         <div className="text-xs uppercase tracking-[0.25em] font-semibold mb-3" style={{ color: "var(--vb-orange)" }}>Live-Simulation</div>
         <h2 className="text-4xl md:text-5xl font-extrabold" style={{ color: "var(--vb-navy)" }}>Sehen Sie den Copilot in Aktion</h2>
-        <p className="mt-3 text-muted-foreground">Klicken Sie auf "Eingehender Anruf" — sehen Sie zu, wie Aurea die Nummer erkennt und das Dossier aufbaut.</p>
+        <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+          Klicken Sie unten links auf <strong>„Eingehender Anruf"</strong>.
+          Beobachten Sie, wie die Rufnummer erkannt, das Kundendossier aufgebaut
+          und passende Themen vorgeschlagen werden — alles bevor Sie abheben.
+        </p>
       </div>
 
       <div className="vb-card rounded-2xl p-3 md:p-5 shadow-[var(--shadow-elegant)]">
@@ -318,9 +322,9 @@ function Dossier({ active, recognized }: { active: boolean; recognized: boolean 
       <div className="mt-5 pt-4 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5">
           <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "var(--vb-navy)" }} />
-          Synchronisiert · agree21 · VR-CRM · Genesys
+          Datenquellen: Telefonie · CRM · Kernbank
         </span>
-        <span className="font-mono">aktualisiert vor 0,4 s</span>
+        <span className="font-mono">Demo-Daten</span>
       </div>
     </div>
   );
